@@ -5,7 +5,7 @@ canvas.width = 200;
 
 const ctx = canvas.getContext("2d");
 const road = new Road(canvas.width/2,canvas.width*0.9);
-const car = new Car(100,100,30,50); // x,y,width,height
+const car = new Car(road.getLaneCenter(1),100,30,50); // x,y,width,height
 car.draw(ctx);// drawing car using this context 
 // but we don't have a car so we define car object by import new file car.js in index.html
 
