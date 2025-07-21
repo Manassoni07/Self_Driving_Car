@@ -61,41 +61,31 @@ class Sensor {
 
     }
 
-    draw(ctx) {
-        for (let i = 0; i < this.rayCount; i++) {
+   draw(ctx) {
+    for (let i = 0; i < this.rayCount; i++) {
+        if (!this.rays[i] || this.rays[i].length < 2) continue; // 🛡️ defensive check
 
-            let end = this.rays[i][1];
-            if(this.readings[i]){
-                end = this.readings[i];
-            }
-
-
-            ctx.beginPath();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = "yellow";
-            ctx.moveTo(
-                this.rays[i][0].x,
-                this.rays[i][0].y
-            );
-            ctx.lineTo(
-                end.x,
-                end.y
-            );
-            ctx.stroke();
-
-
-            ctx.beginPath();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = "black";
-            ctx.moveTo(
-                this.rays[i][1].x,
-                this.rays[i][1].y
-            );
-            ctx.lineTo(
-                end.x,
-                end.y
-            );
-            ctx.stroke();
+        let end = this.rays[i][1];
+        if (this.readings[i]) {
+            end = this.readings[i];
         }
+
+        // Yellow line (from car to intersection or full ray)
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "yellow";
+        ctx.moveTo(this.rays[i][0].x, this.rays[i][0].y);
+        ctx.lineTo(end.x, end.y);
+        ctx.stroke();
+
+        // Black line (from intersection to end of ray)
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "black";
+        ctx.moveTo(this.rays[i][1].x, this.rays[i][1].y);
+        ctx.lineTo(end.x, end.y);
+        ctx.stroke();
     }
+}
+
 }
