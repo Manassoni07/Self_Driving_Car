@@ -12,7 +12,7 @@ car.draw(ctx);// drawing car using this context
 animate();
 
 function animate(){
-    car.update();
+    car.update(road.borders);
 
     canvas.height = window.innerHeight; // this will solve car issue of extend 
     
